@@ -15,8 +15,20 @@ enum ArtistType {
 }
 
 model Artist {
-  id   String     @id @default(auto()) @map("_id") @db.ObjectId
-  uuid String     @unique @default(uuid())
-  type ArtistType
-  name String
+  id     String     @id @default(auto()) @map("_id") @db.ObjectId
+  uuid   String     @unique @default(uuid())
+  type   ArtistType
+  name   String
+  videos Video[]
+}
+
+model Video {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String   @unique @default(uuid())
+  youtube     String
+  title       String
+  description String
+  date        DateTime
+  artist      Artist   @relation(fields: [artistId], references: [id])
+  artistId    String   @db.ObjectId
 }

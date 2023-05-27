@@ -1,4 +1,5 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Video } from '../video/video.model';
 
 export enum ArtistType {
   GROUP_FEMALE = 'GROUP_FEMALE',
@@ -19,4 +20,7 @@ export class Artist {
 
   @Field(() => ArtistType)
   type: ArtistType;
+
+  @Field(() => [Video])
+  videos: Video[];
 }

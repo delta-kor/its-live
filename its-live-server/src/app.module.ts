@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ArtistModule } from './artist/artist.module';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
+import { VideoModule } from './video/video.module';
 import * as path from 'path';
 
 @Module({
@@ -15,6 +16,7 @@ import * as path from 'path';
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
     }),
     ArtistModule,
+    VideoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

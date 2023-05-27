@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ArtistResolver } from './artist.resolver';
+import { VideoResolver } from './video.resolver';
 import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
   imports: [PrismaModule],
-  providers: [ArtistResolver],
+  providers: [VideoResolver],
 })
-export class ArtistModule {}
+export class VideoModule {}
