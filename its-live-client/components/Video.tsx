@@ -12,7 +12,11 @@ export default function Video({ video }: Props) {
       <Youtube
         videoId={video.youtube}
         className={'w-full aspect-video'}
-        opts={{ width: '100%', height: '100%' }}
+        opts={{
+          width: '100%',
+          height: '100%',
+          playerVars: { autoplay: 1, color: 'white' },
+        }}
       />
     </div>
   );

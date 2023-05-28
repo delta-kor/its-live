@@ -8,14 +8,16 @@ export default async function IndexPage() {
   });
 
   return (
-    <div
-      className={
-        'px-6 flex flex-col gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3'
-      }
-    >
-      {videos.map((video) => (
-        <VideoCard key={video.uuid} video={video} />
-      ))}
-    </div>
+    <>
+      <div
+        className={
+          'px-6 flex flex-col gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3'
+        }
+      >
+        {videos.map((video) => (
+          <VideoCard key={video.uuid} video={video} />
+        ))}
+      </div>
+    </>
   );
 }

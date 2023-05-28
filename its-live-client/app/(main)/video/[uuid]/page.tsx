@@ -15,8 +15,9 @@ export default async function VideoPage({ params: { uuid } }: Props) {
   );
 
   return (
-    <div className={'px-6 flex flex-col'}>
+    <div>
       <Video video={video} />
+      <div className={'px-6 flex flex-col'}></div>
     </div>
   );
 }
