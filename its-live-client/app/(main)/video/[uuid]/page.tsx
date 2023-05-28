@@ -1,4 +1,5 @@
 import Video from '@/components/Video';
+import VideoInfo from '@/components/VideoInfo';
 import { GetVideoByUuid, GetVideoByUuidResponse } from '@/graphql/queries';
 import { GraphQL } from '@/lib/graphql';
 
@@ -15,9 +16,9 @@ export default async function VideoPage({ params: { uuid } }: Props) {
   );
 
   return (
-    <div>
+    <div className={'flex flex-col gap-4'}>
       <Video video={video} />
-      <div className={'px-6 flex flex-col'}></div>
+      <VideoInfo video={video} />
     </div>
   );
 }

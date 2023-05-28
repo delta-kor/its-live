@@ -1,3 +1,7 @@
 export default function Loading() {
-  return <h1>LOADING!!!</h1>;
+  return (
+    <div>
+      <div className={'w-full aspect-video bg-black-c'}></div>
+    </div>
+  );
 }
