@@ -9,7 +9,7 @@ export default function VideoInfo({ video }: Props) {
     <div className={'flex px-6 gap-3 lg:gap-4 items-center'}>
       <div
         className={
-          'flex w-10 lg:w-12 h-10 lg:h-12 rounded-full items-center justify-center'
+          'flex w-10 lg:w-12 h-10 lg:h-12 flex-shrink-0 rounded-full items-center justify-center '
         }
         style={{ background: video.artist.color }}
       >
