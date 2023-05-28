@@ -8,7 +8,8 @@ import {
 } from '@nestjs/graphql';
 import { Video } from './video.model';
 import { PrismaService } from '../prisma/prisma.service';
-import { Request } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
+import { ManageGuard } from '../manage/manage.guard';
 
 @Resolver((of) => Video)
 export class VideoResolver {
@@ -34,6 +35,7 @@ export class VideoResolver {
   }
 
   @Mutation(() => Video)
+  @UseGuards(ManageGuard)
   async createVideo(
     @Args('youtube') youtube: string,
     @Args('title') title: string,
