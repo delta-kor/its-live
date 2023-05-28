@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request';
 
 export const GetNewVideos = gql`
-  query GetNewVideos($count: Int!) {
-    videos: newVideos(count: $count) {
+  query GetNewVideos($count: Int!, $cursor: String) {
+    videos: newVideos(count: $count, cursor: $cursor) {
       uuid
       youtube
       title

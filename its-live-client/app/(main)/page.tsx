@@ -8,8 +8,10 @@ export default async function IndexPage() {
     count: 12,
   });
 
+  const cursor = videos.slice(-1)[0].uuid;
+
   return (
-    <VideoCardList>
+    <VideoCardList cursor={cursor}>
       {videos.map((video) => (
         <VideoCard key={video.uuid} video={video} />
       ))}
