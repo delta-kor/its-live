@@ -5,7 +5,7 @@ import { GraphQL } from '@/lib/graphql';
 
 export default async function IndexPage() {
   const { videos } = await GraphQL.request<GetNewVideosResponse>(GetNewVideos, {
-    count: 10,
+    count: 12,
   });
 
   return (

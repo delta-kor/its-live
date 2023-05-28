@@ -39,8 +39,8 @@ export class VideoResolver {
   newVideos(
     @Args('count', { type: () => Int, defaultValue: 5 }) count: number,
   ) {
-    if (count < 1 || count > 10)
-      throw new Error('Count must be between 1 and 10');
+    if (count < 1 || count > 30)
+      throw new Error('Count must be between 1 and 30');
 
     return this.prismaService.video.findMany({
       orderBy: {
