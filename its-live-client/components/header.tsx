@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <div
       className={
-        'fixed top-0 left-0 w-full bg-white bg-opacity-80 backdrop-blur-lg'
+        'fixed top-0 left-0 w-full bg-white bg-opacity-80 backdrop-blur-lg z-10'
       }
     >
       <div

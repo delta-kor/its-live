@@ -16,7 +16,7 @@ export default function VideoCard({ video }: Props) {
       <div className={'flex flex-col'}>
         <div className={'flex gap-2 items-center'}>
           <Logo
-            className={'h-[18px]'}
+            className={'max-h-[16px] max-w-[52px]'}
             uuid={video.artist.uuid}
             color={video.artist.color}
           />
