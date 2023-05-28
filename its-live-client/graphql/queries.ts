@@ -7,6 +7,10 @@ export const GetNewVideos = gql`
       youtube
       title
       description
+      artist {
+        uuid
+        color
+      }
     }
   }
 `;

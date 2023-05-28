@@ -16,7 +16,8 @@ interface IVideo {
 
 interface IArtist {
   uuid: string;
-  name: string;
   type: ArtistType;
+  name: string;
+  color: string;
   videos: IVideo[];
 }

@@ -15,11 +15,14 @@ export class Artist {
   @Field()
   uuid: string;
 
+  @Field(() => ArtistType)
+  type: ArtistType;
+
   @Field()
   name: string;
 
-  @Field(() => ArtistType)
-  type: ArtistType;
+  @Field()
+  color: string;
 
   @Field(() => [Video])
   videos: Video[];
