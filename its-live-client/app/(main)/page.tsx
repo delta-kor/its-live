@@ -1,4 +1,5 @@
 import VideoCard from '@/components/VideoCard';
+import VideoCardList from '@/components/VideoCardList';
 import { GetNewVideos, GetNewVideosResponse } from '@/graphql/queries';
 import { GraphQL } from '@/lib/graphql';
 
@@ -8,16 +9,10 @@ export default async function IndexPage() {
   });
 
   return (
-    <>
-      <div
-        className={
-          'px-6 flex flex-col gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3'
-        }
-      >
-        {videos.map((video) => (
-          <VideoCard key={video.uuid} video={video} />
-        ))}
-      </div>
-    </>
+    <VideoCardList>
+      {videos.map((video) => (
+        <VideoCard key={video.uuid} video={video} />
+      ))}
+    </VideoCardList>
   );
 }

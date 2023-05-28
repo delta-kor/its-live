@@ -36,17 +36,43 @@ export class VideoResolver {
   }
 
   @Query(() => [Video])
-  newVideos(
-    @Args('count', { type: () => Int, defaultValue: 5 }) count: number,
+  async newVideos(
+    @Args('count', { type: () => Int, defaultValue: 12 }) count: number,
+    @Args('cursor', { nullable: true }) cursor?: string,
   ) {
     if (count < 1 || count > 30)
       throw new Error('Count must be between 1 and 30');
+
+    if (cursor) {
+      return this.prismaService.video.findMany({
+        orderBy: {
+          date: 'desc',
+        },
+        cursor: {
+          uuid: cursor,
+        },
+        skip: 1,
+        take: count,
+      });
+    }
 
     return this.prismaService.video.findMany({
       orderBy: {
         date: 'desc',
       },
       take: count,
+    });
+  }
+
+  @Query(() => [Video])
+  recommendedVideos(
+    @Args('count', { type: () => Int, defaultValue: 5 }) count: number,
+  ) {
+    if (count < 1 || count > 30)
+      throw new Error('Count must be between 1 and 30');
+
+    return this.prismaService.video.aggregateRaw({
+      pipeline: [{ $sample: { size: count } }],
     });
   }
 
