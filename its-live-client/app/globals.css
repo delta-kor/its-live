@@ -8,6 +8,10 @@
   }
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   -webkit-tap-highlight-color: transparent;
   @apply bg-white text-black-c;

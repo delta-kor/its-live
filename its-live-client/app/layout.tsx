@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import './globals.css';
 import { Nanum_Gothic } from 'next/font/google';
+import Header from '@/components/Header';
 
 const font = Nanum_Gothic({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -24,7 +25,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={font.className}>
-        <div className={'max-w-6xl mx-auto'}>{children}</div>
+        <Header />
+        <div className={'max-w-6xl mx-auto pt-24'}>{children}</div>
       </body>
     </html>
   );
