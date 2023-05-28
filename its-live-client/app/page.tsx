@@ -1,3 +1,11 @@
-export default function Home() {
-  return <h1>hello world</h1>;
-}
+import Header from '@/components/header';
+
+const IndexPage: React.FC = () => {
+  return (
+    <div className="flex flex-col">
+      <Header />
+    </div>
+  );
+};
+
+export default IndexPage;
