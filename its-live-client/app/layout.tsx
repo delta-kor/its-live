@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Nanum_Gothic } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const font = Nanum_Gothic({ subsets: ['latin'], weight: ['400', '700'] });
 
 export const metadata: Metadata = {
   title: "It's LIVE",
@@ -23,7 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>
+        <div className={'max-w-6xl mx-auto'}>{children}</div>
+      </body>
     </html>
   );
 }
