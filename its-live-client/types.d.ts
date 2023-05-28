@@ -1,0 +1,22 @@
+enum ArtistType {
+  GROUP_FEMALE = 'GROUP_FEMALE',
+  GROUP_MALE = 'GROUP_MALE',
+  SOLO_FEMALE = 'SOLO_FEMALE',
+  SOLO_MALE = 'SOLO_MALE',
+}
+
+interface IVideo {
+  uuid: string;
+  youtube: string;
+  title: string;
+  description: string;
+  date: Date;
+  artist: IArtist;
+}
+
+interface IArtist {
+  uuid: string;
+  name: string;
+  type: ArtistType;
+  videos: IVideo[];
+}

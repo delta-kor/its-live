@@ -5,6 +5,7 @@ import {
   ResolveField,
   Parent,
   Mutation,
+  Int,
 } from '@nestjs/graphql';
 import { Video } from './video.model';
 import { PrismaService } from '../prisma/prisma.service';
@@ -31,6 +32,21 @@ export class VideoResolver {
       where: {
         uuid,
       },
+    });
+  }
+
+  @Query(() => [Video])
+  newVideos(
+    @Args('count', { type: () => Int, defaultValue: 5 }) count: number,
+  ) {
+    if (count < 1 || count > 10)
+      throw new Error('Count must be between 1 and 10');
+
+    return this.prismaService.video.findMany({
+      orderBy: {
+        date: 'desc',
+      },
+      take: count,
     });
   }
 
