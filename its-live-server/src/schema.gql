@@ -34,3 +34,7 @@ type Query {
   artistByUuid(uuid: String!): Artist!
   videoByUuid(uuid: String!): Video!
 }
+
+type Mutation {
+  createVideo(youtube: String!, title: String!, description: String!, date: DateTime!, artistUuid: String!): Video!
+}

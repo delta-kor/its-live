@@ -19,6 +19,7 @@ model Artist {
   uuid   String     @unique @default(uuid())
   type   ArtistType
   name   String
+  color  String
   videos Video[]
 }
 

@@ -1,6 +1,14 @@
-import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Args,
+  ResolveField,
+  Parent,
+  Mutation,
+} from '@nestjs/graphql';
 import { Video } from './video.model';
 import { PrismaService } from '../prisma/prisma.service';
+import { Request } from '@nestjs/common';
 
 @Resolver((of) => Video)
 export class VideoResolver {
@@ -21,6 +29,29 @@ export class VideoResolver {
     return this.prismaService.video.findUnique({
       where: {
         uuid,
+      },
+    });
+  }
+
+  @Mutation(() => Video)
+  async createVideo(
+    @Args('youtube') youtube: string,
+    @Args('title') title: string,
+    @Args('description') description: string,
+    @Args('date') date: Date,
+    @Args('artistUuid') artistUuid: string,
+  ) {
+    return this.prismaService.video.create({
+      data: {
+        youtube,
+        title,
+        description,
+        date,
+        artist: {
+          connect: {
+            uuid: artistUuid,
+          },
+        },
       },
     });
   }
