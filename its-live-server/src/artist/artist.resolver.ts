@@ -36,6 +36,7 @@ export class ArtistResolver {
   async videosByArtistUuid(
     @Args('uuid') uuid: string,
     @Args('count', { type: () => Int, defaultValue: 2 }) count: number,
+    @Args('videoUuid', { nullable: true }) videoUuid?: string,
   ) {
     if (count < 1 || count > 30)
       throw new Error('Count must be between 1 and 30');
@@ -47,6 +48,7 @@ export class ArtistResolver {
       .videos({
         take: count,
       });
-    return videos;
+
+    return videos.filter((video) => video.uuid !== videoUuid);
   }
 }

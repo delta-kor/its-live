@@ -33,8 +33,12 @@ export const GetVideoByUuid = gql`
 export type GetVideoByUuidResponse = { video: IVideo };
 
 export const GetVideosByArtistUuid = gql`
-  query GetVideosByArtistUuid($uuid: String!, $count: Int) {
-    videos: videosByArtistUuid(uuid: $uuid, count: $count) {
+  query GetVideosByArtistUuid($uuid: String!, $count: Int, $videoUuid: String) {
+    videos: videosByArtistUuid(
+      uuid: $uuid
+      count: $count
+      videoUuid: $videoUuid
+    ) {
       uuid
       youtube
       title
@@ -49,8 +53,8 @@ export const GetVideosByArtistUuid = gql`
 export type GetVideosByArtistUuidResponse = { videos: IVideo[] };
 
 export const GetRecommendedVideos = gql`
-  query GetRecommendedVideos($count: Int!) {
-    videos: recommendedVideos(count: $count) {
+  query GetRecommendedVideos($count: Int!, $videoUuid: String) {
+    videos: recommendedVideos(count: $count, videoUuid: $videoUuid) {
       uuid
       youtube
       title

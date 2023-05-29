@@ -67,12 +67,16 @@ export class VideoResolver {
   @Query(() => [Video])
   recommendedVideos(
     @Args('count', { type: () => Int, defaultValue: 5 }) count: number,
+    @Args('videoUuid', { nullable: true }) videoUuid?: string,
   ) {
     if (count < 1 || count > 30)
       throw new Error('Count must be between 1 and 30');
 
     return this.prismaService.video.aggregateRaw({
-      pipeline: [{ $sample: { size: count } }],
+      pipeline: [
+        { $match: { uuid: { $ne: videoUuid } } },
+        { $sample: { size: count } },
+      ],
     });
   }
 
