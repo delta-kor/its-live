@@ -14,6 +14,7 @@ import * as path from 'path';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
+      playground: process.env.NODE_ENV !== 'production',
     }),
     ArtistModule,
     VideoModule,
