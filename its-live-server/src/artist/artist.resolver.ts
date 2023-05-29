@@ -1,4 +1,11 @@
-import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Args,
+  ResolveField,
+  Parent,
+  Int,
+} from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { Artist } from './artist.model';
 import { Video } from '../video/video.model';
@@ -26,12 +33,20 @@ export class ArtistResolver {
   }
 
   @Query(() => [Video])
-  async videosByArtistUuid(@Args('uuid') uuid: string) {
+  async videosByArtistUuid(
+    @Args('uuid') uuid: string,
+    @Args('count', { type: () => Int, defaultValue: 2 }) count: number,
+  ) {
+    if (count < 1 || count > 30)
+      throw new Error('Count must be between 1 and 30');
+
     const videos = await this.prismaService.artist
       .findUnique({
         where: { uuid },
       })
-      .videos();
+      .videos({
+        take: count,
+      });
     return videos;
   }
 }
