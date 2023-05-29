@@ -14,7 +14,7 @@ export default function VideoCardHorizontal({ video }: Props) {
       />
       <div className={'flex flex-col flex-grow min-w-0 items-start gap-0.5'}>
         <Logo
-          className={'max-h-[16px] flex-shrink-0'}
+          className={'max-h-[16px] max-w-[52px] flex-shrink-0'}
           uuid={video.artist.uuid}
           color={video.artist.color}
         />
