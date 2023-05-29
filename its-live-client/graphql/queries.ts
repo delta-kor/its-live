@@ -26,6 +26,7 @@ export const GetVideoByUuid = gql`
       artist {
         uuid
         color
+        name
       }
     }
   }

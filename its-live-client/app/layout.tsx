@@ -6,7 +6,11 @@ const font = Nanum_Gothic({ subsets: ['latin'], weight: ['400', '700'] });
 
 export const metadata: Metadata = {
   title: "It's LIVE",
-  description: "It's LIVE",
+  description: 'MORE than LIVE, MORE than KPOP | 잇츠라이브',
+  openGraph: {
+    title: "It's LIVE",
+    description: 'MORE than LIVE, MORE than KPOP | 잇츠라이브',
+  },
   viewport: {
     width: 'device-width',
     height: 'device-height',
