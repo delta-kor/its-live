@@ -3,22 +3,25 @@
 import { GetNewVideos } from '@/graphql/queries';
 import { GetNewVideosResponse } from '@/graphql/queries';
 import { GraphQL } from '@/lib/graphql';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import VideoCard from './VideoCard';
+import session from '@/utils/session';
 
 interface Props {
   cursor: string;
   children: React.ReactNode;
 }
 
-export default function VideoCardList({ cursor, children }: Props) {
-  const sessionData = sessionStorage.getItem('video_card_list');
-  const sessionDataParsed = sessionData ? JSON.parse(sessionData) : {};
+interface Session {
+  videos: IVideo[];
+  cursor: string;
+}
 
-  const [videos, setVideos] = useState<IVideo[]>(
-    sessionDataParsed.videos || []
-  );
-  const cursorRef = useRef<string>(sessionDataParsed.cursor || cursor);
+export default function VideoCardList({ cursor, children }: Props) {
+  const sessionData = session.get<Session>('video_card_list');
+
+  const [videos, setVideos] = useState<IVideo[]>(sessionData.videos || []);
+  const cursorRef = useRef<string>(sessionData.cursor || cursor);
   const observerRef = useRef<HTMLDivElement>(null);
   const loading = useRef<boolean>(false);
   const ended = useRef<boolean>(false);
@@ -68,10 +71,10 @@ export default function VideoCardList({ cursor, children }: Props) {
     const appendedVideos = [...videos, ...newVideos];
     setVideos(appendedVideos);
 
-    sessionStorage.setItem(
-      'video_card_list',
-      JSON.stringify({ videos: appendedVideos, cursor: cursorRef.current })
-    );
+    session.set<Session>('video_card_list', {
+      videos: appendedVideos,
+      cursor: cursorRef.current,
+    });
   };
 
   return (
