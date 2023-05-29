@@ -33,6 +33,7 @@ enum ArtistType {
 
 type Query {
   artistByUuid(uuid: String!): Artist!
+  videosByArtistUuid(uuid: String!): [Video!]!
   videoByUuid(uuid: String!): Video!
   newVideos(count: Int! = 12, cursor: String): [Video!]!
   recommendedVideos(count: Int! = 5): [Video!]!
