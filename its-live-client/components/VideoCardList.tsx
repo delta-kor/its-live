@@ -3,7 +3,7 @@
 import { GetNewVideos } from '@/graphql/queries';
 import { GetNewVideosResponse } from '@/graphql/queries';
 import { GraphQL } from '@/lib/graphql';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import VideoCard from './VideoCard';
 
 interface Props {
@@ -12,8 +12,13 @@ interface Props {
 }
 
 export default function VideoCardList({ cursor, children }: Props) {
-  const [videos, setVideos] = useState<IVideo[]>([]);
-  const cursorRef = useRef<string>(cursor);
+  const sessionData = sessionStorage.getItem('video_card_list');
+  const sessionDataParsed = sessionData ? JSON.parse(sessionData) : {};
+
+  const [videos, setVideos] = useState<IVideo[]>(
+    sessionDataParsed.videos || []
+  );
+  const cursorRef = useRef<string>(sessionDataParsed.cursor || cursor);
   const observerRef = useRef<HTMLDivElement>(null);
   const loading = useRef<boolean>(false);
   const ended = useRef<boolean>(false);
@@ -37,7 +42,7 @@ export default function VideoCardList({ cursor, children }: Props) {
         observer.unobserve(observerRef.current);
       }
     };
-  }, [observerRef]);
+  }, [observerRef, videos]);
 
   const handleLoadMore = async () => {
     if (ended.current || loading.current) return;
@@ -60,7 +65,13 @@ export default function VideoCardList({ cursor, children }: Props) {
     }
 
     cursorRef.current = newVideos[newVideos.length - 1].uuid;
-    setVideos((prev) => [...prev, ...newVideos]);
+    const appendedVideos = [...videos, ...newVideos];
+    setVideos(appendedVideos);
+
+    sessionStorage.setItem(
+      'video_card_list',
+      JSON.stringify({ videos: appendedVideos, cursor: cursorRef.current })
+    );
   };
 
   return (
