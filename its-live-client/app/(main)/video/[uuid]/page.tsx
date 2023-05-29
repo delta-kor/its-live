@@ -39,7 +39,7 @@ export default async function VideoPage({ params: { uuid } }: Props) {
     ]);
 
   return (
-    <div className={'flex flex-col gap-4'}>
+    <div className={'flex flex-col gap-4 pb-6'}>
       <Video video={video} />
       <VideoInfo video={video} />
       {!!artistVideos.length && (
