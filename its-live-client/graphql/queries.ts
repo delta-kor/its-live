@@ -68,3 +68,20 @@ export const GetRecommendedVideos = gql`
   }
 `;
 export type GetRecommendedVideosResponse = { videos: IVideo[] };
+
+export const GetArtistByUuid = gql`
+  query GetArtistByUuid($uuid: String!) {
+    artist: artistByUuid(uuid: $uuid) {
+      uuid
+      name
+      color
+      videos {
+        uuid
+        youtube
+        title
+        description
+      }
+    }
+  }
+`;
+export type GetArtistByUuidResponse = { artist: IArtist };

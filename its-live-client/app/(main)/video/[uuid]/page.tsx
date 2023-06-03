@@ -11,6 +11,7 @@ import {
 } from '@/graphql/queries';
 import { GraphQL } from '@/lib/graphql';
 import Logo from '@/components/Logo';
+import Link from 'next/link';
 
 interface Props {
   params: {
@@ -51,13 +52,15 @@ export default async function VideoPage({ params: { uuid } }: Props) {
                 color={video.artist.color}
                 className={'max-h-[24px] max-w-[58px] flex-shrink-0'}
               />
-              <div
-                className={
-                  'text-sm font-bold text-primary-c cursor-pointer select-none'
-                }
-              >
-                전체보기
-              </div>
+              <Link href={`/artist/${video.artist.uuid}`}>
+                <div
+                  className={
+                    'text-sm font-bold text-primary-c hover:text-primary-l1 cursor-pointer select-none transition-colors duration-100'
+                  }
+                >
+                  전체보기
+                </div>
+              </Link>
             </div>
             <VideoCardListHorizontal videos={artistVideos} />
           </div>
