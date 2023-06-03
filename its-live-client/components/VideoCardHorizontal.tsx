@@ -9,7 +9,7 @@ interface Props {
 export default function VideoCardHorizontal({ video }: Props) {
   return (
     <Link href={`/video/${video.uuid}`}>
-      <div className={'flex gap-3 items-center'}>
+      <div className={'flex gap-3 items-center jelly'}>
         <img
           className={'h-16 flex-shrink-0 rounded-md aspect-video'}
           src={getThumbnail(video.youtube)}

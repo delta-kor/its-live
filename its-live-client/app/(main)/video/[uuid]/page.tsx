@@ -42,30 +42,32 @@ export default async function VideoPage({ params: { uuid } }: Props) {
     <div className={'flex flex-col gap-4 pb-6'}>
       <Video video={video} />
       <VideoInfo video={video} />
-      {!!artistVideos.length && (
-        <div className={'flex flex-col gap-2'}>
-          <div className={'flex px-6 justify-between'}>
-            <Logo
-              uuid={video.artist.uuid}
-              color={video.artist.color}
-              className={'max-h-[24px] max-w-[58px] flex-shrink-0'}
-            />
-            <div
-              className={
-                'text-sm font-bold text-primary-c cursor-pointer select-none'
-              }
-            >
-              전체보기
+      <div className={'flex flex-col gap-4 lg:grid lg:grid-cols-2'}>
+        {!!artistVideos.length && (
+          <div className={'flex flex-col gap-2 lg:order-2'}>
+            <div className={'flex px-6 justify-between'}>
+              <Logo
+                uuid={video.artist.uuid}
+                color={video.artist.color}
+                className={'max-h-[24px] max-w-[58px] flex-shrink-0'}
+              />
+              <div
+                className={
+                  'text-sm font-bold text-primary-c cursor-pointer select-none'
+                }
+              >
+                전체보기
+              </div>
             </div>
+            <VideoCardListHorizontal videos={artistVideos} />
           </div>
-          <VideoCardListHorizontal videos={artistVideos} />
+        )}
+        <div className={'flex flex-col gap-2 lg:order-1'}>
+          <div className={'flex px-6 justify-between'}>
+            <div className={'text-md font-bold select-none'}>추천 동영상</div>
+          </div>
+          <VideoCardListHorizontal videos={recommendedVideos} />
         </div>
-      )}
-      <div className={'flex flex-col gap-2'}>
-        <div className={'flex px-6 justify-between'}>
-          <div className={'text-md font-bold select-none'}>추천 동영상</div>
-        </div>
-        <VideoCardListHorizontal videos={recommendedVideos} />
       </div>
     </div>
   );
