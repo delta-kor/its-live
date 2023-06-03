@@ -15,7 +15,7 @@ export default function ArtistHeader({ artist }: Props) {
       >
         <Logo
           className={
-            'max-w-[30px] lg:max-w-[40px] max-h-[30px] lg:max-h-[40px]'
+            'max-w-[30px] lg:max-w-[48px] max-h-[30px] lg:max-h-[48px]'
           }
           uuid={artist.uuid}
           color={'#ffffff'}

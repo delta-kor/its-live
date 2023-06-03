@@ -20,24 +20,28 @@ interface Props {
 export async function generateMetadata({
   params: { uuid },
 }: Props): Promise<Metadata> {
-  const { video } = await GraphQL.request<GetVideoByUuidResponse>(
-    GetVideoByUuid,
-    { uuid }
-  );
+  try {
+    const { video } = await GraphQL.request<GetVideoByUuidResponse>(
+      GetVideoByUuid,
+      { uuid }
+    );
 
-  return {
-    title: `${video.title} - ${video.artist.name} | It's LIVE`,
-    description: video.description,
-    openGraph: {
+    return {
       title: `${video.title} - ${video.artist.name} | It's LIVE`,
       description: video.description,
-      images: [
-        {
-          url: getThumbnail(video.youtube),
-          width: 1280,
-          height: 720,
-        },
-      ],
-    },
-  };
+      openGraph: {
+        title: `${video.title} - ${video.artist.name} | It's LIVE`,
+        description: video.description,
+        images: [
+          {
+            url: getThumbnail(video.youtube),
+            width: 1280,
+            height: 720,
+          },
+        ],
+      },
+    };
+  } catch (e) {
+    return {};
+  }
 }
