@@ -23,6 +23,7 @@ export const GetVideoByUuid = gql`
       youtube
       title
       description
+      start
       artist {
         uuid
         color

@@ -19,7 +19,7 @@ export default function Video({ video }: Props) {
           opts={{
             width: '100%',
             height: '100%',
-            playerVars: { autoplay: 1, color: 'white' },
+            playerVars: { autoplay: 1, color: 'white', start: video.start },
           }}
         />
       </div>

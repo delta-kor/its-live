@@ -8,6 +8,7 @@ type Video {
   title: String!
   description: String!
   date: DateTime!
+  start: Int!
   artist: Artist!
 }
 

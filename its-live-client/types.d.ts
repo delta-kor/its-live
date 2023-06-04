@@ -11,6 +11,7 @@ interface IVideo {
   title: string;
   description: string;
   date: Date;
+  start: number;
   artist: IArtist;
 }
 

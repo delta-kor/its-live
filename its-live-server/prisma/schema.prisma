@@ -30,6 +30,7 @@ model Video {
   title       String
   description String
   date        DateTime
+  start       Int      @default(0)
   artist      Artist   @relation(fields: [artistId], references: [id])
   artistId    String   @db.ObjectId
 }
