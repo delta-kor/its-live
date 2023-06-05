@@ -86,3 +86,19 @@ export const GetArtistByUuid = gql`
   }
 `;
 export type GetArtistByUuidResponse = { artist: IArtist };
+
+export const SearchVideos = gql`
+  query SearchVideos($query: String!, $count: Int) {
+    videos: searchVideos(query: $query, count: $count) {
+      uuid
+      youtube
+      title
+      description
+      artist {
+        uuid
+        color
+      }
+    }
+  }
+`;
+export type SearchVideosResponse = { videos: IVideo[] };
