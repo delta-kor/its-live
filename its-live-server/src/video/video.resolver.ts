@@ -105,6 +105,28 @@ export class VideoResolver {
     return videos.filter((video) => video.uuid !== videoUuid);
   }
 
+  @Query(() => [Video])
+  async searchVideos(
+    @Args('query') query: string,
+    @Args('count', { type: () => Int, defaultValue: 5 }) count: number,
+  ) {
+    if (count < 1 || count > 30)
+      throw new Error('Count must be between 1 and 30');
+
+    const videos = await this.prismaService.video.findRaw({
+      filter: { $text: { $search: query } },
+      options: {
+        projection: {
+          score: { $meta: 'textScore' },
+        },
+        sort: { score: 1 },
+        limit: count,
+      },
+    });
+
+    return videos;
+  }
+
   @Mutation(() => Video)
   @UseGuards(ManageGuard)
   async createVideo(
