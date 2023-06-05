@@ -35,3 +35,10 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# PWA
+public/sw.js
+public/workbox-*.js
+public/android
+public/ios
+public/windows11

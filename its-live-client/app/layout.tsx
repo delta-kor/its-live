@@ -18,6 +18,13 @@ export const metadata: Metadata = {
     minimumScale: 1,
     initialScale: 1,
   },
+  manifest: '/manifest.json',
+  icons: [
+    {
+      rel: 'icon',
+      url: '/favicon.png',
+    },
+  ],
 };
 
 export default function RootLayout({
