@@ -113,15 +113,30 @@ export class VideoResolver {
     if (count < 1 || count > 30)
       throw new Error('Count must be between 1 and 30');
 
-    const videos = await this.prismaService.video.findRaw({
-      filter: { $text: { $search: query } },
-      options: {
-        projection: {
-          score: { $meta: 'textScore' },
+    const videos = await this.prismaService.video.aggregateRaw({
+      pipeline: [
+        {
+          $search: {
+            index: 'itslive_video',
+            text: {
+              query,
+              path: ['title', 'description'],
+            },
+          },
         },
-        sort: { score: 1 },
-        limit: count,
-      },
+        {
+          $addFields: {
+            score: {
+              $meta: 'searchScore',
+            },
+          },
+        },
+        {
+          $sort: {
+            score: -1,
+          },
+        },
+      ],
     });
 
     return videos;

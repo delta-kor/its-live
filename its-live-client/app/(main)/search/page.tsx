@@ -17,7 +17,14 @@ export default async function SearchPage({ searchParams }: Props) {
 
   return (
     <div className={'flex flex-col gap-6 px-6 pb-4'}>
-      <div className={'text-xl font-bold'}>{`"${q}" 검색 결과`}</div>
+      <div className={'flex items-center gap-2'}>
+        <div className={'text-xl'}>
+          <span className={'font-bold mr-1'}>{q}</span>검색 결과
+        </div>
+        <div className={'text-xl font-bold text-primary-c'}>
+          {videos.length}
+        </div>
+      </div>
       <div
         className={
           'flex flex-col gap-6 w-full sm:grid sm:grid-cols-2 lg:grid-cols-3'
